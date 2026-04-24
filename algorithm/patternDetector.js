@@ -14,7 +14,7 @@ export class PatternDetector {
         const x2 = index2 % this.cols;
         const y2 = Math.floor(index2 / this.cols);
 
-        // Check if within 1 block radius
+        
         const dx = Math.abs(x1 - x2);
         const dy = Math.abs(y1 - y2);
 

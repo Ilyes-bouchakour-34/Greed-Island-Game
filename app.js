@@ -4,12 +4,12 @@ import { ScorePanel } from './components/ScorePanel.js';
 import { ProbabilityEngine } from './algorithm/probabilityEngine.js';
 import { InterferenceManager } from './algorithm/interferenceManager.js';
 
-// --- Game Constants & Symbols ---
+
 const SYMBOLS = [
     '🕷️', '⛓️', '🃏', '🎣', '⚡', '👁️', '🔥', '💧', 
     '🍃', '🦋', '🗡️', '🛡️', '⏳', '🌀', '🎭', '🩸', 
     '🕸️', '✨', '🎲', '🧠'
-]; // 20 unique symbols
+]; 
 
 class GreedIslandGame {
     constructor() {
@@ -17,16 +17,16 @@ class GreedIslandGame {
         this.flippedIndices = [];
         this.isLocked = false;
         
-        // Init Components
+        
         this.cardGrid = new CardGrid('card-grid', this.handleCardClick.bind(this));
         this.probOverlay = new ProbabilityOverlay();
         this.scorePanel = new ScorePanel(this.handleTimeUp.bind(this));
         
-        // Init Algorithms
+        
         this.probEngine = new ProbabilityEngine();
         this.interferenceMgr = new InterferenceManager();
 
-        // Bind UI elements
+        
         this.alertEl = document.getElementById('interference-alert');
         this.gameOverScreen = document.getElementById('game-over-screen');
         this.restartBtn = document.getElementById('restart-btn');
@@ -57,7 +57,7 @@ class GreedIslandGame {
             deck.push({ symbol: symbol, isMatched: false });
         });
 
-        // Fisher-Yates Shuffle
+        
         for (let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -73,11 +73,11 @@ class GreedIslandGame {
         this.flippedIndices.push(index);
 
         if (this.flippedIndices.length === 1) {
-            // First card flipped, calculate probabilities for the rest
+            
             const probs = this.probEngine.calculateProbabilities(this.cards, index, this.flippedIndices);
             this.probOverlay.update(probs, index);
         } else if (this.flippedIndices.length === 2) {
-            // Second card flipped, lock board and check match
+            
             this.isLocked = true;
             this.probOverlay.hideAll();
             this.scorePanel.incrementMoves();
@@ -91,7 +91,7 @@ class GreedIslandGame {
         const card2 = this.cards[index2];
 
         if (card1.symbol === card2.symbol) {
-            // Match!
+            
             card1.isMatched = true;
             card2.isMatched = true;
             this.cardGrid.markMatched(index1, index2);
@@ -105,7 +105,7 @@ class GreedIslandGame {
                 this.handleWin();
             }
         } else {
-            // Mismatch
+            
             this.cardGrid.unflipCards(index1, index2);
             const triggered = this.interferenceMgr.recordMismatch();
             
@@ -164,7 +164,7 @@ class GreedIslandGame {
     }
 }
 
-// Start game when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
     new GreedIslandGame();
 });

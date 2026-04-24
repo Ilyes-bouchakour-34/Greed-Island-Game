@@ -5,7 +5,7 @@ export class InterferenceManager {
     }
 
     recordMatch() {
-        this.consecutiveMismatches = 0; // Reset on match
+        this.consecutiveMismatches = 0; 
     }
 
     recordMismatch() {
@@ -25,9 +25,9 @@ export class InterferenceManager {
      * @returns {boolean} True if interference occurred
      */
     triggerInterference(cards, cardGrid, scorePanel) {
-        this.consecutiveMismatches = 0; // Reset after trigger
+        this.consecutiveMismatches = 0; 
 
-        // Find all matched pairs
+        
         const matchedIndices = [];
         cards.forEach((card, index) => {
             if (card.isMatched) {
@@ -37,11 +37,11 @@ export class InterferenceManager {
 
         if (matchedIndices.length === 0) return false;
 
-        // Pick a random matched card
+        
         const randomIndex = matchedIndices[Math.floor(Math.random() * matchedIndices.length)];
         const targetSymbol = cards[randomIndex].symbol;
 
-        // Find both cards of this symbol and unmatch them
+        
         let unflippedCount = 0;
         cards.forEach((card, index) => {
             if (card.symbol === targetSymbol && card.isMatched) {

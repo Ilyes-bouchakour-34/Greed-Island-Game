@@ -19,16 +19,16 @@ export class CardGrid {
             const cardFront = document.createElement('div');
             cardFront.className = 'card-face card-front';
             
-            // Container for the probability overlay
+            
             const probOverlay = document.createElement('div');
             probOverlay.className = 'prob-overlay';
             probOverlay.id = `prob-${index}`;
-            probOverlay.style.display = 'none'; // Hidden initially
+            probOverlay.style.display = 'none'; 
             cardFront.appendChild(probOverlay);
 
             const cardBack = document.createElement('div');
             cardBack.className = 'card-face card-back';
-            cardBack.textContent = card.symbol; // Hidden until flipped
+            cardBack.textContent = card.symbol; 
 
             cardEl.appendChild(cardFront);
             cardEl.appendChild(cardBack);
@@ -61,7 +61,7 @@ export class CardGrid {
         if (this.elements[index]) {
             this.elements[index].classList.remove('flipped');
             this.elements[index].classList.remove('matched');
-            // Trigger nen effect animation
+            
             this.elements[index].classList.add('nen-effect');
             setTimeout(() => {
                 this.elements[index].classList.remove('nen-effect');

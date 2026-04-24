@@ -14,7 +14,7 @@ export class ProbabilityOverlay {
         this.overlays.forEach((overlay, index) => {
             if (!overlay) return;
 
-            // Don't show probability for the currently flipped card or matched cards
+            
             if (activeCardIndex === index || probabilities[index] === -1) {
                 overlay.style.display = 'none';
                 return;
@@ -25,7 +25,7 @@ export class ProbabilityOverlay {
                 overlay.textContent = `${Math.round(prob)}%`;
                 overlay.style.display = 'block';
 
-                // Color coding based on probability
+                
                 overlay.classList.remove('prob-high', 'prob-low');
                 if (prob >= 50) {
                     overlay.classList.add('prob-high');
@@ -33,7 +33,7 @@ export class ProbabilityOverlay {
                     overlay.classList.add('prob-low');
                 }
             } else {
-                // If no active card, hide probabilities
+                
                 overlay.style.display = 'none';
             }
         });

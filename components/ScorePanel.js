@@ -7,7 +7,7 @@ export class ScorePanel {
         this.moves = 0;
         this.pairs = 0;
         this.totalPairs = 20;
-        this.timeLeft = 60; // 60 seconds
+        this.timeLeft = 60; 
         this.timerInterval = null;
         this.onTimeUp = onTimeUp;
     }
@@ -25,7 +25,7 @@ export class ScorePanel {
 
             if (this.timeLeft <= 10) {
                 this.timerEl.style.color = '#ff3366';
-                this.timerEl.classList.add('nen-effect'); // Make it shake when time is low
+                this.timerEl.classList.add('nen-effect'); 
             }
 
             if (this.timeLeft <= 0) {
