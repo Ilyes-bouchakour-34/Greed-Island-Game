@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greed Island: The Cards Matcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header class="hud">
+            <div class="hud-item timer-panel">
+                <span class="label">TIME REMAINING</span>
+                <span id="timer" class="value neon-text">60:00</span>
+            </div>
+            <div class="hud-item title-panel">
+                <h1>GREED ISLAND</h1>
+                <h2 class="subtitle">THE CARDS MATCHER</h2>
+            </div>
+            <div class="hud-item stats-panel">
+                <div class="stat">
+                    <span class="label">MOVES</span>
+                    <span id="move-counter" class="value">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">PAIRS</span>
+                    <span id="pair-counter" class="value">0 / 20</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="card-grid" class="grid">
+            <!-- Cards will be generated here -->
+        </main>
+
+        <div id="interference-alert" class="hidden">
+            <div class="alert-content">
+                <h3>BUNGEE GUM INTERFERENCE!</h3>
+                <p>Hisoka's Nen has distorted your memory.</p>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="game-result-title"></h2>
+                <p id="game-result-desc"></p>
+                <div class="stats-summary">
+                    <p>Time: <span id="final-time"></span></p>
+                    <p>Moves: <span id="final-moves"></span></p>
+                </div>
+                <button id="restart-btn" class="glow-on-hover">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ES6 Module import -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
