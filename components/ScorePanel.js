@@ -20,6 +20,7 @@ export class ScorePanel {
 
         clearInterval(this.timerInterval);
         this.timerInterval = setInterval(() => {
+            if (this.isFrozen) return;
             this.timeLeft--;
             this.updateDisplay();
 
@@ -43,6 +44,22 @@ export class ScorePanel {
     incrementMoves() {
         this.moves++;
         this.updateDisplay();
+    }
+
+    addTime(seconds) {
+        this.timeLeft += seconds;
+        this.updateDisplay();
+    }
+
+    freezeTimer(duration) {
+        this.isFrozen = true;
+        this.timerEl.style.color = '#00f3ff';
+        this.timerEl.classList.add('nen-effect');
+        setTimeout(() => {
+            this.isFrozen = false;
+            this.timerEl.classList.remove('nen-effect');
+            this.timerEl.style.color = '';
+        }, duration * 1000);
     }
 
     incrementPairs() {

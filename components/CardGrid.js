@@ -75,4 +75,13 @@ export class CardGrid {
             if (this.elements[index2]) this.elements[index2].classList.add('matched');
         }, 500);
     }
+
+    updateCardSymbol(index, symbol) {
+        if (this.elements[index]) {
+            const cardBack = this.elements[index].querySelector('.card-back');
+            if (cardBack) {
+                cardBack.textContent = symbol;
+            }
+        }
+    }
 }

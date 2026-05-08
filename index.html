@@ -16,7 +16,7 @@
             </div>
             <div class="hud-item title-panel">
                 <h1>GREED ISLAND</h1>
-                <h2 class="subtitle">THE CARDS MATCHER</h2>
+                <h2 class="subtitle">STAGE <span id="stage-level">1</span>: <span id="stage-boss" class="neon-text">GENTHRU</span></h2>
             </div>
             <div class="hud-item stats-panel">
                 <div class="stat">
@@ -33,6 +33,25 @@
         <main id="card-grid" class="grid">
             <!-- Cards will be generated here -->
         </main>
+
+        <div id="spells-panel" class="spells-container">
+            <div class="spell-card" id="spell-accompany">
+                <span class="spell-name">Accompany</span>
+                <span class="spell-cost">50 NP</span>
+            </div>
+            <div class="spell-card" id="spell-magnetic">
+                <span class="spell-name">Magnetic Force</span>
+                <span class="spell-cost">40 NP</span>
+            </div>
+            <div class="spell-card" id="spell-thief">
+                <span class="spell-name">Thief</span>
+                <span class="spell-cost">30 NP</span>
+            </div>
+            <div class="nen-bar-container">
+                <div class="nen-label">Nen Points: <span id="nen-points">0</span></div>
+                <div class="nen-bar-bg"><div id="nen-bar-fill" class="nen-bar-fill"></div></div>
+            </div>
+        </div>
 
         <div id="interference-alert" class="hidden">
             <div class="alert-content">
