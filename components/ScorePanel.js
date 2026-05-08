@@ -7,15 +7,19 @@ export class ScorePanel {
         this.moves = 0;
         this.pairs = 0;
         this.totalPairs = 20;
-        this.timeLeft = 60; 
+        this.timeLeft = 60;
+        this.startTime = 60; // track original time for stats
         this.timerInterval = null;
+        this.isFrozen = false;
         this.onTimeUp = onTimeUp;
     }
 
     start() {
         this.moves = 0;
         this.pairs = 0;
-        this.timeLeft = 60;
+        // timeLeft is set externally by initStage() before calling start()
+        this.startTime = this.timeLeft; // remember for stats
+        this.isFrozen = false;
         this.updateDisplay();
 
         clearInterval(this.timerInterval);
@@ -84,7 +88,7 @@ export class ScorePanel {
     getStats() {
         return {
             moves: this.moves,
-            timeElapsed: 60 - this.timeLeft
+            timeElapsed: this.startTime - this.timeLeft
         };
     }
 }

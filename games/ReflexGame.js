@@ -36,13 +36,13 @@ export class ReflexGame {
     initListeners() {
         document.getElementById('reflex-exit').addEventListener('click', () => {
             this.cleanup();
-            if (this.onExit) this.onExit();
+            if (this.onExit) this.onExit(false);
         });
         
         const target = document.getElementById('reflex-target');
-        target.addEventListener('mousedown', () => {
-            this.hitTarget();
-        });
+        // Support both mouse and touch (mobile)
+        target.addEventListener('mousedown', () => this.hitTarget());
+        target.addEventListener('touchstart', (e) => { e.preventDefault(); this.hitTarget(); }, { passive: false });
     }
     
     start() {
@@ -94,11 +94,11 @@ export class ReflexGame {
     endGame() {
         clearInterval(this.interval);
         this.audioEngine.playWin();
-        document.getElementById('reflex-result').textContent = 'TRAINING COMPLETE!';
-        
+        document.getElementById('reflex-result').textContent = 'TRAINING COMPLETE! ⚡';
+
         setTimeout(() => {
-            document.getElementById('reflex-result').textContent = 'Restarting...';
-            setTimeout(() => this.start(), 2000);
+            this.cleanup();
+            if (this.onExit) this.onExit(true);
         }, 3000);
     }
 }

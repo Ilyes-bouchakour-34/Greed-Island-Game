@@ -51,7 +51,7 @@ export class MatcherGame {
         if (this.exitBtn) {
             this.exitBtn.addEventListener('click', () => {
                 this.cleanup();
-                if (this.onExit) this.onExit();
+                if (this.onExit) this.onExit(false);
             });
         }
 
@@ -282,16 +282,20 @@ export class MatcherGame {
     handleWin() {
         this.scorePanel.stop();
         this.isLocked = true;
-        
         if (this.razorInterval) clearInterval(this.razorInterval);
 
         if (this.currentStageIndex < STAGES.length - 1) {
             this.audioEngine.playWin();
             this.currentStageIndex++;
-            this.showGameOverScreen(true, true); // Win, but has next stage
+            this.showGameOverScreen(true, true);
         } else {
             this.audioEngine.playWin();
-            this.showGameOverScreen(true, false); // Ultimate Win
+            this.showGameOverScreen(true, false);
+            // Signal full win to hub
+            setTimeout(() => {
+                this.cleanup();
+                if (this.onExit) this.onExit(true);
+            }, 5000);
         }
     }
 

@@ -8,6 +8,7 @@ export class JajankenGame {
         this.gonScore = 0;
         this.rounds = 3;
         this.currentRound = 0;
+        this._timeouts = []; // track all timeouts for cleanup
         
         this.choices = ['Rock', 'Paper', 'Scissors'];
         
@@ -51,9 +52,9 @@ export class JajankenGame {
     initListeners() {
         document.getElementById('jajanken-exit').addEventListener('click', () => {
             this.cleanup();
-            if (this.onExit) this.onExit();
+            if (this.onExit) this.onExit(false);
         });
-        
+
         const btns = this.container.querySelectorAll('.btn-choice');
         btns.forEach(btn => {
             btn.addEventListener('click', (e) => this.playRound(e.target.dataset.choice));
@@ -73,6 +74,9 @@ export class JajankenGame {
     }
     
     cleanup() {
+        // Cancel all pending timeouts to prevent post-exit crashes
+        this._timeouts.forEach(t => clearTimeout(t));
+        this._timeouts = [];
         this.container.classList.add('hidden');
     }
     
@@ -84,12 +88,12 @@ export class JajankenGame {
         document.getElementById('jajanken-gon-move').textContent = 'Charging...';
         document.getElementById('jajanken-gon-move').classList.add('nen-effect');
         
-        setTimeout(() => {
+        const t = setTimeout(() => {
             const gonChoice = this.choices[Math.floor(Math.random() * this.choices.length)];
             document.getElementById('jajanken-gon-move').classList.remove('nen-effect');
-            
             this.evaluateRound(playerChoice, gonChoice);
         }, 1000);
+        this._timeouts.push(t);
     }
     
     evaluateRound(player, gon) {
@@ -117,7 +121,7 @@ export class JajankenGame {
         
         this.updateUI();
         
-        setTimeout(() => {
+        const t = setTimeout(() => {
             if (this.currentRound >= this.rounds) {
                 this.endGame();
             } else {
@@ -127,6 +131,7 @@ export class JajankenGame {
                 resultEl.textContent = 'Next Round... Choose!';
             }
         }, 2000);
+        this._timeouts.push(t);
     }
     
     getEmoji(move) {
@@ -149,20 +154,21 @@ export class JajankenGame {
     
     endGame() {
         const resultEl = document.getElementById('jajanken-result');
-        if (this.playerScore > this.gonScore) {
-            resultEl.textContent = 'YOU DEFEATED GON!';
+        const won = this.playerScore > this.gonScore;
+        if (won) {
+            resultEl.textContent = `YOU DEFEATED GON! (${this.playerScore}-${this.gonScore})`;
             this.audioEngine.playWin();
         } else if (this.gonScore > this.playerScore) {
-            resultEl.textContent = 'GON DEFEATED YOU!';
+            resultEl.textContent = `GON DEFEATED YOU! (${this.gonScore}-${this.playerScore})`;
             this.audioEngine.playLose();
         } else {
-            resultEl.textContent = 'IT\'S A TIE!';
+            resultEl.textContent = "IT'S A TIE! Try again!";
             this.audioEngine.playMatch();
         }
-        
+
         setTimeout(() => {
-            resultEl.textContent = 'Game Over. Restarting in 3...';
-            setTimeout(() => this.start(), 3000);
+            this.cleanup();
+            if (this.onExit) this.onExit(won);
         }, 3000);
     }
 }

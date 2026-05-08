@@ -3,48 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greed Island: The Cards Matcher</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <title>Greed Island — Hunter x Hunter</title>
+    <meta name="description" content="Enter Greed Island. A Hunter x Hunter interactive game experience.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500;800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- PARTICLE BACKGROUND -->
+    <canvas id="nen-particles" class="particle-canvas"></canvas>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- BOOT SCREEN                             -->
+    <!-- ═══════════════════════════════════════ -->
     <div id="boot-screen" class="boot-screen">
-        <h1 class="neon-text" style="font-size: 3rem;">SYSTEM BOOTING...</h1>
-        <p class="subtitle">CONNECTING TO GREED ISLAND...</p>
-    </div>
+        <!-- Dramatic character art — dark Gon fills the right side -->
+        <div class="boot-char-wrap">
+            <img src="images/gon-dark.jpg" alt="" class="boot-char-img">
+        </div>
+        <!-- Green Nen aura rings -->
+        <div class="boot-aura boot-aura-1"></div>
+        <div class="boot-aura boot-aura-2"></div>
+        <div class="boot-aura boot-aura-3"></div>
 
-    <div id="water-divination-container" class="hidden water-divination-container"></div>
-
-    <div id="main-menu" class="menu-container">
-        <div class="menu-content">
-            <h1 class="hunter-title">HUNTER <span class="x">x</span> HUNTER</h1>
-            <h2 class="menu-subtitle">GREED ISLAND CONSOLE</h2>
-            
-            <div id="license-display" style="margin-bottom: 30px;"></div>
-            
-            <div class="games-grid-menu">
-                <div class="game-card-menu glow-on-hover" id="btn-matcher">
-                    <h3>Memory of Hisoka</h3>
-                    <p>Match cards and survive the Bungee Gum traps.</p>
-                </div>
-                <div class="game-card-menu glow-on-hover" id="btn-jajanken">
-                    <h3>Gon's Jajanken</h3>
-                    <p>Rock, Paper, Scissors against Gon Freecss.</p>
-                </div>
-                <div class="game-card-menu glow-on-hover" id="btn-reflex">
-                    <h3>Killua's Godspeed</h3>
-                    <p>Test your reflexes in Heaven's Arena.</p>
-                </div>
+        <!-- Left side content -->
+        <div class="boot-content">
+            <img src="images/hxh-logo.png" alt="Hunter x Hunter" class="boot-hxh-logo">
+            <div class="boot-gi-title">GREED ISLAND</div>
+            <div class="boot-tagline" id="boot-tagline"></div>
+            <div class="boot-lines" id="boot-lines"></div>
+            <div class="boot-bar-container">
+                <div class="boot-bar" id="boot-bar"></div>
+                <div class="boot-bar-label" id="boot-bar-label">LOADING...</div>
             </div>
         </div>
     </div>
 
+    <!-- ═══════════════════════════════════════ -->
+    <!-- WATER DIVINATION                        -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="water-divination-container" class="hidden water-divination-container"></div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MAIN HUB MENU                           -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="main-menu" class="hidden menu-container">
+        <div class="menu-content">
+
+            <div class="hxh-logo">
+                <img src="images/hxh-logo.png" alt="Hunter x Hunter" class="hxh-logo-img">
+                <div class="gi-badge">GREED ISLAND</div>
+            </div>
+
+            <!-- Hunter License Card -->
+            <div id="license-display"></div>
+
+            <!-- Card Collection Tracker -->
+            <div id="collection-display" class="collection-strip"></div>
+
+            <!-- Games -->
+            <div class="games-grid-menu">
+
+                <div class="game-card-menu" id="btn-matcher">
+                    <div class="game-card-inner">
+                        <div class="game-card-char">
+                            <img src="images/hisoka.png" alt="Hisoka" class="char-img char-hisoka">
+                        </div>
+                        <div class="game-card-icon">🃏</div>
+                        <h3>Memory of Hisoka</h3>
+                        <p>Survive Bungee Gum traps and match all cards across 3 Boss stages.</p>
+                        <div class="game-card-tag">CARD #00: BOOK</div>
+                        <div id="best-matcher" class="best-score"></div>
+                    </div>
+                </div>
+
+                <div class="game-card-menu" id="btn-jajanken">
+                    <div class="game-card-inner">
+                        <div class="game-card-char">
+                            <img src="images/gon.png" alt="Gon" class="char-img char-gon">
+                        </div>
+                        <div class="game-card-icon">✊</div>
+                        <h3>Gon's Jajanken</h3>
+                        <p>Challenge Gon Freecss in his signature Nen combat technique. Win 2 out of 3.</p>
+                        <div class="game-card-tag">CARD #32: WILD LUCK</div>
+                        <div id="best-jajanken" class="best-score"></div>
+                    </div>
+                </div>
+
+                <div class="game-card-menu" id="btn-reflex">
+                    <div class="game-card-inner">
+                        <div class="game-card-char">
+                            <img src="images/gon-killua.jpg" alt="Gon & Killua" class="char-img char-killua">
+                        </div>
+                        <div class="game-card-icon">⚡</div>
+                        <h3>Killua's Godspeed</h3>
+                        <p>Train at Heaven's Arena and match the lightning speed of the Zoldyck heir.</p>
+                        <div class="game-card-tag">CARD #83: RULER'S BLESSING</div>
+                        <div id="best-reflex" class="best-score"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="btn-reset-license" class="reset-btn">⚙ Reset Hunter License</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CARD AWARD SCREEN                       -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="card-award-screen" class="hidden card-award-screen">
+        <div class="card-award-content">
+            <div class="card-award-shimmer"></div>
+            <div class="gi-card-visual" id="award-card-visual">
+                <div class="gi-card-number" id="award-card-number"></div>
+                <div class="gi-card-symbol" id="award-card-symbol"></div>
+                <div class="gi-card-name" id="award-card-name"></div>
+            </div>
+            <p class="award-quote" id="award-quote"></p>
+            <button id="award-continue-btn" class="glow-on-hover">CLAIM CARD</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MATCHER GAME                            -->
+    <!-- ═══════════════════════════════════════ -->
     <div id="game-container" class="hidden">
         <header class="hud">
             <div class="hud-item timer-panel">
                 <span class="label">TIME REMAINING</span>
                 <span id="timer" class="value neon-text">60:00</span>
-                <button id="exit-btn" class="glow-on-hover" style="margin-top: 5px; padding: 4px 10px; font-size: 0.6rem;">EXIT</button>
+                <button id="exit-btn" class="exit-mini-btn">✕ EXIT</button>
             </div>
             <div class="hud-item title-panel">
                 <h1>GREED ISLAND</h1>
@@ -62,9 +151,7 @@
             </div>
         </header>
 
-        <main id="card-grid" class="grid">
-            <!-- Cards will be generated here -->
-        </main>
+        <main id="card-grid" class="grid"></main>
 
         <div id="spells-panel" class="spells-container">
             <div class="spell-card" id="spell-accompany">
@@ -97,7 +184,7 @@
                 <h2 id="game-result-title"></h2>
                 <p id="game-result-desc"></p>
                 <div class="stats-summary">
-                    <p>Time: <span id="final-time"></span></p>
+                    <p>Time Used: <span id="final-time"></span></p>
                     <p>Moves: <span id="final-moves"></span></p>
                 </div>
                 <button id="restart-btn" class="glow-on-hover">PLAY AGAIN</button>
@@ -105,10 +192,19 @@
         </div>
     </div>
 
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MINI GAMES                              -->
+    <!-- ═══════════════════════════════════════ -->
     <div id="jajanken-container" class="hidden"></div>
     <div id="reflex-container" class="hidden"></div>
 
-    <!-- ES6 Module import -->
-    <script type="module" src="app.js?v=2.0"></script>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- TRANSITION OVERLAY                      -->
+    <!-- ═══════════════════════════════════════ -->
+    <div id="transition-overlay" class="hidden transition-overlay">
+        <div class="transition-book">📖</div>
+    </div>
+
+    <script type="module" src="app.js"></script>
 </body>
 </html>
