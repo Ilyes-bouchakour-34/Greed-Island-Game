@@ -12,9 +12,9 @@ const SYMBOLS = [
 ];
 
 const STAGES = [
-    { level: 1, boss: 'GENTHRU', time: 60, threshold: 5 },
-    { level: 2, boss: 'RAZOR', time: 80, threshold: 4 },
-    { level: 3, boss: 'HISOKA', time: 100, threshold: 2 }
+    { level: 1, boss: 'GENTHRU', time: 240, threshold: 5 },
+    { level: 2, boss: 'RAZOR', time: 260, threshold: 4 },
+    { level: 3, boss: 'HISOKA', time: 280, threshold: 2 }
 ];
 
 export class MatcherGame {

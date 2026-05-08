@@ -132,7 +132,7 @@ class HubOrchestrator {
             this.showCardAward(gameKey);
         } else {
             this.saveBestScore(gameKey);
-            this.transitionTo(() => this.showMenu());
+            this.showMenu();
         }
     }
 
@@ -219,8 +219,8 @@ class HubOrchestrator {
             <div class="collection-label">SPECIFIED SLOT CARDS: ${owned} / ${total}</div>
             <div class="collection-cards">
                 ${Object.values(CardCollection.CARDS).map(c => `
-                    <div class="mini-card ${this.collection.hasCard(c.id) ? 'mini-card-owned' : 'mini-card-locked'}">
-                        <span>${this.collection.hasCard(c.id) ? c.symbol : '🔒'}</span>
+                    <div class="mini-card mini-card-owned">
+                        <span>${c.symbol}</span>
                         <small>${c.number}</small>
                     </div>
                 `).join('')}
