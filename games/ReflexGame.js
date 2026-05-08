@@ -71,8 +71,8 @@ export class ReflexGame {
         const rX = Math.floor(Math.random() * maxX);
         const rY = Math.floor(Math.random() * maxY);
         
-        target.style.left = \`\${rX}px\`;
-        target.style.top = \`\${rY}px\`;
+        target.style.left = `${rX}px`;
+        target.style.top = `${rY}px`;
     }
     
     hitTarget() {
