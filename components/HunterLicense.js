@@ -4,17 +4,26 @@ export class HunterLicense {
     }
 
     load() {
-        const data = localStorage.getItem('hxh_license');
-        if (data) {
-            this.profile = JSON.parse(data);
-        } else {
+        try {
+            const data = localStorage.getItem('hxh_license');
+            if (data) {
+                this.profile = JSON.parse(data);
+            } else {
+                this.profile = null;
+            }
+        } catch (e) {
+            console.warn("localStorage not available", e);
             this.profile = null;
         }
     }
 
     save(profileData) {
         this.profile = profileData;
-        localStorage.setItem('hxh_license', JSON.stringify(this.profile));
+        try {
+            localStorage.setItem('hxh_license', JSON.stringify(this.profile));
+        } catch (e) {
+            console.warn("localStorage not available", e);
+        }
     }
 
     hasLicense() {

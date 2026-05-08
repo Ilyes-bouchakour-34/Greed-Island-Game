@@ -95,6 +95,5 @@ class HubOrchestrator {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    new HubOrchestrator();
-});
+// Initialize the orchestrator (type="module" guarantees DOM is parsed)
+new HubOrchestrator();
