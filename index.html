@@ -8,19 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500;800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=1.1">
     <script>
-        setTimeout(function() {
-            if (!window.appLoaded) {
-                const el = document.getElementById('boot-lines');
-                if (el) {
-                    const div = document.createElement('div');
-                    div.className = 'boot-line boot-line-final';
-                    div.style.color = '#ff3366';
-                    div.style.fontWeight = 'bold';
-                    div.textContent = '> ERROR: Loading timed out. Please try Hard Refresh (Ctrl+F5) or use Incognito Mode.';
-                    el.appendChild(div);
-                }
-            }
-        }, 8000);
+        window.onerror = function(message, source, lineno, colno, error) {
+            alert("JS Error: " + message + "\nLine: " + lineno + "\nSource: " + source);
+        };
     </script>
 </head>
 <body>
