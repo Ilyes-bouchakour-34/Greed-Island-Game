@@ -688,3 +688,155 @@ h1 {
     font-size: 1.2rem;
     text-align: center;
 }
+
+/* BOOT SCREEN */
+.boot-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* WATER DIVINATION */
+.water-divination-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+.divination-content {
+    background: var(--glass-bg);
+    border: 1px solid var(--neon-blue);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+}
+
+.water-glass {
+    width: 100px;
+    height: 150px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.water-level {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: rgba(0, 243, 255, 0.5);
+    transition: all 2s ease;
+    transform-origin: bottom;
+}
+
+.leaf {
+    position: absolute;
+    bottom: 60%;
+    left: 40%;
+    font-size: 2rem;
+    transition: all 2s ease;
+}
+
+.quiz-area {
+    margin-top: 20px;
+}
+
+.answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quiz-btn {
+    padding: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.result-area {
+    margin-top: 20px;
+}
+
+.result-area h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.result-area p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes auraBurst {
+    0% { box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50% { box-shadow: 0 0 50px rgba(255,255,255,0.8); }
+    100% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+}
+
+.aura-burst {
+    animation: auraBurst 2s forwards;
+}
+
+/* LICENSE CARD */
+.license-card {
+    background: linear-gradient(135deg, #111, #333);
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: inline-block;
+    border: 2px solid #555;
+}
+
+.license-header {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+}
+
+.license-body {
+    text-align: left;
+}
+
+.license-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.license-type {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.book-appear {
+    animation: bookAppear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes bookAppear {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
