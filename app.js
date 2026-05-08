@@ -248,3 +248,4 @@ class HubOrchestrator {
 }
 
 new HubOrchestrator();
+window.appLoaded = true;
