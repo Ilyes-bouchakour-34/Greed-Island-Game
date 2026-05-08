@@ -508,3 +508,183 @@ h1 {
         right: 2px;
     }
 }
+
+/* MAIN MENU STYLES */
+.menu-container {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #0a1f0a 0%, #000000 100%);
+}
+
+.menu-content {
+    text-align: center;
+    background: rgba(10, 30, 10, 0.8);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #00ffaa;
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.4);
+    max-width: 800px;
+    width: 90%;
+}
+
+.hunter-title {
+    font-size: 3rem;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0 #000, 0 0 10px #00ffaa;
+}
+
+.hunter-title .x {
+    color: #ff3366;
+    font-size: 2.5rem;
+}
+
+.menu-subtitle {
+    color: #00ffaa;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.games-grid-menu {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.game-card-menu {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #00ffaa;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.game-card-menu:hover {
+    transform: scale(1.05);
+}
+
+.game-card-menu h3 {
+    color: #00ffaa;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.game-card-menu p {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+/* JAJANKEN STYLES */
+#jajanken-container, #reflex-container {
+    width: 100%;
+    max-width: 800px;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+.jajanken-arena, .reflex-arena {
+    flex-grow: 1;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.jajanken-score, .reflex-score {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.jajanken-battle-area {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.jajanken-move {
+    font-size: 5rem;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+.jajanken-result {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: var(--neon-magenta);
+    text-shadow: 0 0 15px var(--neon-magenta);
+    height: 40px;
+}
+
+.jajanken-controls {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-choice {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+}
+
+/* REFLEX STYLES */
+.reflex-board {
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid var(--neon-blue);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.reflex-target {
+    position: absolute;
+    font-size: 3rem;
+    cursor: crosshair;
+    user-select: none;
+    transition: left 0.1s linear, top 0.1s linear;
+}
+
+.reflex-target:active {
+    transform: scale(1.5);
+}
+
+.reflex-instructions {
+    color: #aaa;
+    font-size: 1.2rem;
+    text-align: center;
+}
