@@ -1,30 +1,46 @@
 export class AudioEngine {
     constructor() {
-        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        this.ctx = null;
         this.enabled = true;
     }
 
-    playTone(frequency, type, duration, vol = 0.1) {
-        if (!this.enabled || !this.ctx) return;
-        
-        if (this.ctx.state === 'suspended') {
-            this.ctx.resume();
+    _getCtx() {
+        if (!this.ctx) {
+            try {
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.warn('AudioContext not supported', e);
+                this.enabled = false;
+            }
         }
+        return this.ctx;
+    }
 
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
+    playTone(frequency, type, duration, vol = 0.1) {
+        if (!this.enabled) return;
+        const ctx = this._getCtx();
+        if (!ctx) return;
 
-        osc.type = type;
-        osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
-        
-        gain.gain.setValueAtTime(vol, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+        try {
+            if (ctx.state === 'suspended') ctx.resume();
 
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
 
-        osc.start();
-        osc.stop(this.ctx.currentTime + duration);
+            osc.type = type;
+            osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+
+            gain.gain.setValueAtTime(vol, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + duration);
+        } catch (e) {
+            // Silently ignore audio errors
+        }
     }
 
     playFlip() {
